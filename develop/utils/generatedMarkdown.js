@@ -27,17 +27,17 @@ function generateMarkdown(data) {
   return `# ${data.title}
 ${renderLicenseBadge(data.license)}
 
-## Description
+## Description 
 ${data.description}
 
-## Table of Contents 
+## Table of Contents 📝
 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Test](#test)
 - [Contributing](#contributing)
 ${renderLicenseLink(data.license)}
-- [Questions](#questions)
+- [Questions](#questions-📝)
 
 ## Installation 
 ${data.installation}
