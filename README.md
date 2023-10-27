@@ -33,3 +33,8 @@ If you have any questions you can email me at kbrandon863@gmail.com if you want 
 
 ## Deployed
 You can view my work [here](https://bkness.github.com/readme-generator/)
+
+## Video 
+
+[Untitled_ Oct 26, 2023 4_50 PM.webm](https://github.com/bkness/readme-generator/assets/123907755/3fb82720-1351-4d5d-a060-086fae0b7af0)
+
