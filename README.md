@@ -2,7 +2,7 @@
  ![Github license](https://img.shields.io/badge/license-BSD%203-blue.svg)
 
 ## Description 
-In this project I am using node packages with inquire and fs to create promptds for a professional readme generator. With this project I am to take away some of the mundane tasks incorporated with readmes and instead make them engaging, and easy to follow!
+In this project I am using node packages with inquire and fs to create promptds for a professional readme generator. With this project I aim to take away some of the mundane tasks incorporated with readmes and instead make them engaging and easy to follow!
 
 ## Table of Contents 📝
 
