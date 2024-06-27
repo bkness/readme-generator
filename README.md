@@ -2,7 +2,7 @@
  ![Github license](https://img.shields.io/badge/license-BSD%203-blue.svg)
 
 ## Description 
-In this project I am using node packages with inquire and fs to create promptds for a professional readme generator. With this project I aim to take away some of the mundane tasks incorporated with readmes and instead make them engaging and easy to follow!
+This project leverages Node.js packages, including `inquirer` and `fs`, to create prompts for a professional README generator. The goal is to streamline the creation of README files, making them engaging and easy to follow, and reducing the mundane tasks often associated with them.
 
 ## Table of Contents 📝
 
@@ -13,35 +13,30 @@ In this project I am using node packages with inquire and fs to create promptds 
 - [Questions](#questions-📝)
 
 ## Installation 
-npm i
+To install the necessary dependencies, run the following command: <br></br>
+`npm i`
 
 ## Usage
-Using the intergrated terminal the user can then create a professional readme mockup 
-
-## Test 
-npm test
+Using the integrated terminal, you can generate a professional README mockup by answering a series of prompts.
 
 ## Contributing
-Fork the project and open a pull request with your new code
+If you wish to contribute, please fork the project and open a pull request with your new code.
 
  ## License
 This project is licensed under the BSD 3 license
 
 ## Questions
-If you have any questions you can email me at kbrandon863@gmail.com if you want to see more of my work, visit my GitHub at [bkness](https://github.com/bkness)
+If you have any questions, feel free to email me at kbrandon863@gmail.com. To see more of my work, visit my GitHub at [bkness](https://github.com/bkness)
 
 ## Deployed
 
-You can view my work [here](https://github.com/bkness/readme-generator)
+You can view the Repository [here](https://github.com/bkness/readme-generator)
 
-## Demonstration 
+## Video Demonstration
+
 [Link to a video demonstration](https://github.com/bkness/readme-generator/assets/123907755/cfad32a6-95b1-4ca9-aeab-f836b7cc1f21)
 
 
-You can view my work [here](https://bkness.github.com/readme-generator/)
 
-## Video 
-
-[Untitled_ Oct 26, 2023 4_50 PM.webm](https://github.com/bkness/readme-generator/assets/123907755/3fb82720-1351-4d5d-a060-086fae0b7af0)
 
 
