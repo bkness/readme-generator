@@ -31,9 +31,17 @@ This project is licensed under the BSD 3 license
 If you have any questions you can email me at kbrandon863@gmail.com if you want to see more of my work, visit my GitHub at [bkness](https://github.com/bkness)
 
 ## Deployed
+
 You can view my work [here](https://github.com/bkness/readme-generator)
 
 ## Demonstration 
 [Link to a video demonstration](https://github.com/bkness/readme-generator/assets/123907755/cfad32a6-95b1-4ca9-aeab-f836b7cc1f21)
+
+
+You can view my work [here](https://bkness.github.com/readme-generator/)
+
+## Video 
+
+[Untitled_ Oct 26, 2023 4_50 PM.webm](https://github.com/bkness/readme-generator/assets/123907755/3fb82720-1351-4d5d-a060-086fae0b7af0)
 
 
