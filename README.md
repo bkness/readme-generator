@@ -8,9 +8,8 @@ In this project I am using node packages with inquire and fs to create promptds 
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Test](#test)
 - [Contributing](#contributing)
- - [License](#license)
+- [License](#license)
 - [Questions](#questions-📝)
 
 ## Installation 
