@@ -1,6 +1,19 @@
-const { renderLicenseBadge, renderLicenseLink, renderLicenseSection } = require('./licenseUtils');
+const {
+  renderLicenseBadge,
+  renderLicenseLink,
+  renderLicenseSection,
+} = require("./licenseUtils");
 
-function generateMarkdown(data) {
+function generateIssues(data) {
+  return `# ${data.githubuser}
+  
+  ## Issue 
+  ${data.issue}
+  `;
+}
+
+// Readme Logic
+function generateReadme(data) {
   return `# ${data.title}
 ${renderLicenseBadge(data.license)}
 
@@ -35,4 +48,4 @@ If you have any questions you can email me at ${data.email}. If you want to see 
 `;
 }
 
-module.exports = generateMarkdown;
+module.exports = { generateReadme, generateIssues };
