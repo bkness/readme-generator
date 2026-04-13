@@ -4,16 +4,8 @@ const {
   renderLicenseSection,
 } = require("./licenseUtils");
 
-function generateIssues(data) {
-  return `# ${data.githubuser}
-  
-  ## Issue 
-  ${data.issue}
-  `;
-}
-
 // Readme Logic
-function generateReadme(data) {
+function generateMarkdown(data) {
   return `# ${data.title}
 ${renderLicenseBadge(data.license)}
 
@@ -24,10 +16,14 @@ ${data.description}
 
 - [Installation](#installation)
 - [Usage](#usage)
+ -[To Do](#to-do) 
 - [Test](#test)
 - [Contributing](#contributing)
 ${renderLicenseLink(data.license)}
-- [Questions](#questions-📝)
+- [Questions](#questions)
+
+## To Do 
+${data.toDo}
 
 ## Installation 
 ${data.installation}
@@ -48,4 +44,4 @@ If you have any questions you can email me at ${data.email}. If you want to see 
 `;
 }
 
-module.exports = { generateReadme, generateIssues };
+module.exports = { generateMarkdown };
