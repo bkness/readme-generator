@@ -1,3 +1,4 @@
+require("dotenv").config();
 const fs = require("fs").promises;
 const { prompt } = require("inquirer");
 const { generateMarkdown } = require("./utils/generateMarkdown.js");
