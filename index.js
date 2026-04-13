@@ -4,12 +4,6 @@ const { prompt } = require("inquirer");
 const { generateMarkdown } = require("./utils/generateMarkdown.js");
 // Asynchronous functions expect a promise, once received use inquirer to prompt for README info.
 
-// Ansi Color for styled terminal prompts
-const blueColor = "\x1b[34m";
-const greenColor = "\x1b[32m";
-const purpleColor = "\x1b[35m";
-const resetColor = "\x1b[0m";
-
 // ... Other questions ...
 const questions = [
   {
@@ -72,7 +66,7 @@ async function init() {
   try {
     const data = await prompt(questions);
     await fs.writeFile("dist/README.md", generateMarkdown(data));
-    console.log(`${purpleColor}Readme was successful!`);
+    console.log(`${purpleColor}Readme was successful!${resetColor}`);
   } catch (error) {
     console.error("Error generating README:", error);
   }
