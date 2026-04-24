@@ -1,17 +1,17 @@
 {
-  "name": "static-site",
-  "version": "1.0.0",
+  "name": "readme-generator",
+  "version": "1.1.0",
+  "description": "Interactive README generator using Inquirer",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests yet\" && exit 0"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Brandon <DevBrandon@icloud.com> (https://github.com/bkness)",
+  "license": "MIT",
+  "keywords": ["readme", "generator", "cli", "inquirer"],
   "dependencies": {
     "chalk": "^5.6.2",
     "inquirer": "8.2.4"
-  },
-  "keywords": [],
-  "description": ""
+  }
 }

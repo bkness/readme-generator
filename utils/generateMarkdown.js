@@ -4,34 +4,33 @@ const {
   renderLicenseSection,
 } = require("./licenseUtils");
 
-// Readme Logic
 function generateMarkdown(data) {
   return `# ${data.title}
 ${renderLicenseBadge(data.license)}
 
-## Description 
+## Description
 ${data.description}
 
-## Table of Contents 📝
+## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
- -[To Do](#to-do) 
+- [To Do](#to-do)
 - [Test](#test)
 - [Contributing](#contributing)
 ${renderLicenseLink(data.license)}
 - [Questions](#questions)
 
-## To Do 
+## To Do
 ${data.toDo}
 
-## Installation 
+## Installation
 ${data.installation}
-re
+
 ## Usage
 ${data.usage}
 
-## Test 
+## Test
 ${data.test}
 
 ## Contributing
@@ -40,7 +39,8 @@ ${data.contributing}
 ${renderLicenseSection(data.license)}
 
 ## Questions
-If you have any questions you can email me at ${data.email}. If you want to see more of my work, visit my GitHub at [${data.github}](https://github.com/${data.github}).
+Questions? Email me at ${data.email}.
+See more of my work at [github.com/${data.github}](https://github.com/${data.github}).
 `;
 }
 

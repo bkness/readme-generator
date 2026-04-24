@@ -1,74 +1,77 @@
-require("dotenv").config();
 const fs = require("fs").promises;
 const { prompt } = require("inquirer");
 const { generateMarkdown } = require("./utils/generateMarkdown.js");
-// Asynchronous functions expect a promise, once received use inquirer to prompt for README info.
 
-// ... Other questions ...
+const green  = "\x1b[32m";
+const purple = "\x1b[35m";
+const reset  = "\x1b[0m";
+
 const questions = [
   {
     type: "input",
-    name: "github",
-    message: `${greenColor}What is your GitHub?${resetColor}`,
-  },
-  {
-    type: "input",
-    name: "email",
-    message: `${greenColor}What is your email?${resetColor}`,
-  },
-  {
-    type: "input",
     name: "title",
-    message: `${greenColor}What is your project's name?${resetColor}`,
+    message: `${green}What is your project's name?${reset}`,
   },
   {
     type: "input",
     name: "description",
-    message: `${greenColor}Please write a short description of your project${resetColor}`,
+    message: `${green}Write a short description of your project:${reset}`,
   },
   {
     type: "input",
     name: "toDo",
-    message: `${greenColor}What are some to do items for this project?${resetColor}`,
+    message: `${green}Any to-do items for this project?${reset}`,
   },
   {
     type: "list",
     name: "license",
-    message: `${greenColor}What kind of license should your project have?${resetColor}`,
+    message: `${green}What license should your project have?${reset}`,
     choices: ["MIT", "APACHE 2.0", "GPL 3.0", "BSD 3", "None"],
   },
   {
     type: "input",
     name: "installation",
-    message: `${greenColor}What command should be run to install dependencies?${resetColor}`,
+    message: `${green}Command to install dependencies:${reset}`,
     default: "npm i",
   },
   {
     type: "input",
     name: "test",
-    message: `${greenColor}What command should be run to run tests?${resetColor}`,
+    message: `${green}Command to run tests:${reset}`,
     default: "npm test",
   },
   {
     type: "input",
     name: "usage",
-    message: `${greenColor}What does the user need to know about using the repo?${resetColor}`,
+    message: `${green}What should users know about using this repo?${reset}`,
   },
   {
     type: "input",
     name: "contributing",
-    message: `${greenColor}What does the user need to know about contributing to the repo?${resetColor}`,
-    default: "Fork the project and open a pull request with your new code",
+    message: `${green}What should users know about contributing?${reset}`,
+    default: "Fork the project and open a pull request with your changes",
+  },
+  {
+    type: "input",
+    name: "github",
+    message: `${green}Your GitHub username:${reset}`,
+  },
+  {
+    type: "input",
+    name: "email",
+    message: `${green}Your email address:${reset}`,
   },
 ];
 
 async function init() {
   try {
+    await fs.mkdir("dist", { recursive: true });
     const data = await prompt(questions);
     await fs.writeFile("dist/README.md", generateMarkdown(data));
-    console.log(`${purpleColor}Readme was successful!${resetColor}`);
+    console.log(`\n${purple}✔ README generated at dist/README.md${reset}\n`);
   } catch (error) {
     console.error("Error generating README:", error);
+    process.exit(1);
   }
 }
 
