@@ -1,7 +1,5 @@
-.gitignore
 node_modules
 package-lock.json
-dist/re
-TODOS.md
+dist/
 .env
-env
+.DS_Store
