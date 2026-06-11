@@ -19,29 +19,29 @@ function techBadges(raw) {
   if (!raw?.trim()) return "";
 
   const colorMap = {
-    "node.js":     "339933&logo=nodedotjs&logoColor=white",
-    "node":        "339933&logo=nodedotjs&logoColor=white",
-    "react":       "61DAFB&logo=react&logoColor=black",
-    "typescript":  "3178C6&logo=typescript&logoColor=white",
-    "javascript":  "F7DF1E&logo=javascript&logoColor=black",
-    "python":      "3776AB&logo=python&logoColor=white",
-    "rust":        "000000&logo=rust&logoColor=white",
-    "go":          "00ADD8&logo=go&logoColor=white",
-    "postgres":    "4169E1&logo=postgresql&logoColor=white",
-    "postgresql":  "4169E1&logo=postgresql&logoColor=white",
-    "mysql":       "4479A1&logo=mysql&logoColor=white",
-    "mongodb":     "47A248&logo=mongodb&logoColor=white",
-    "docker":      "2496ED&logo=docker&logoColor=white",
-    "tailwind":    "06B6D4&logo=tailwindcss&logoColor=white",
+    "node.js": "339933&logo=nodedotjs&logoColor=white",
+    "node": "339933&logo=nodedotjs&logoColor=white",
+    "react": "61DAFB&logo=react&logoColor=black",
+    "typescript": "3178C6&logo=typescript&logoColor=white",
+    "javascript": "F7DF1E&logo=javascript&logoColor=black",
+    "python": "3776AB&logo=python&logoColor=white",
+    "rust": "000000&logo=rust&logoColor=white",
+    "go": "00ADD8&logo=go&logoColor=white",
+    "postgres": "4169E1&logo=postgresql&logoColor=white",
+    "postgresql": "4169E1&logo=postgresql&logoColor=white",
+    "mysql": "4479A1&logo=mysql&logoColor=white",
+    "mongodb": "47A248&logo=mongodb&logoColor=white",
+    "docker": "2496ED&logo=docker&logoColor=white",
+    "tailwind": "06B6D4&logo=tailwindcss&logoColor=white",
     "tailwindcss": "06B6D4&logo=tailwindcss&logoColor=white",
-    "express":     "000000&logo=express&logoColor=white",
-    "next.js":     "000000&logo=nextdotjs&logoColor=white",
-    "nextjs":      "000000&logo=nextdotjs&logoColor=white",
-    "vite":        "646CFF&logo=vite&logoColor=white",
-    "supabase":    "3ECF8E&logo=supabase&logoColor=white",
-    "vercel":      "000000&logo=vercel&logoColor=white",
-    "zsh":         "1A2C34&logo=gnu-bash&logoColor=white",
-    "bash":        "4EAA25&logo=gnubash&logoColor=white",
+    "express": "000000&logo=express&logoColor=white",
+    "next.js": "000000&logo=nextdotjs&logoColor=white",
+    "nextjs": "000000&logo=nextdotjs&logoColor=white",
+    "vite": "646CFF&logo=vite&logoColor=white",
+    "supabase": "3ECF8E&logo=supabase&logoColor=white",
+    "vercel": "000000&logo=vercel&logoColor=white",
+    "zsh": "1A2C34&logo=gnu-bash&logoColor=white",
+    "bash": "4EAA25&logo=gnubash&logoColor=white",
   };
 
   return raw
@@ -49,12 +49,12 @@ function techBadges(raw) {
     .map((s) => s.trim())
     .filter(Boolean)
     .map((tech) => {
-      const key    = tech.toLowerCase();
+      const key = tech.toLowerCase();
       const colors = colorMap[key] || "555555&logoColor=white";
-      const label  = encodeURIComponent(tech);
+      const label = encodeURIComponent(tech);
       // Flip the first `&` to `?` so shields.io reads logo/logoColor/style as
       // query params, not literal message text — otherwise logos never render.
-      const query  = colors.replace("&", "?");
+      const query = colors.replace("&", "?");
       return `![${tech}](https://img.shields.io/badge/${label}-${query}&style=flat-square)`;
     })
     .join(" ");
@@ -65,16 +65,16 @@ function techBadges(raw) {
 function buildToc(data) {
   const entries = [
     "- [Description](#description)",
-    data.techStack?.trim()                       ? "- [Tech Stack](#tech-stack)"                       : "",
-    data.includeFeatures && data.features?.trim()        ? "- [Features](#features)"                   : "",
-    data.includeScreenshots                      ? "- [Screenshots](#screenshots)"                     : "",
+    data.techStack?.trim() ? "- [Tech Stack](#tech-stack)" : "",
+    data.includeFeatures && data.features?.trim() ? "- [Features](#features)" : "",
+    data.includeScreenshots ? "- [Screenshots](#screenshots)" : "",
     "- [Installation](#installation)",
-    data.envVars?.trim()                         ? "- [Environment Variables](#environment-variables)" : "",
+    data.envVars?.trim() ? "- [Environment Variables](#environment-variables)" : "",
     ...(data.tables || []).map((t) => `- [${t.heading}](#${slugify(t.heading)})`),
-    data.usage?.trim()                           ? "- [Usage](#usage)"                                 : "",
+    data.usage?.trim() ? "- [Usage](#usage)" : "",
     "- [Tests](#tests)",
-    data.includeContributing && data.contributing        ? "- [Contributing](#contributing)"           : "",
-    data.includeRoadmap && data.roadmap?.trim()          ? "- [Roadmap](#roadmap)"                     : "",
+    data.includeContributing && data.contributing ? "- [Contributing](#contributing)" : "",
+    data.includeRoadmap && data.roadmap?.trim() ? "- [Roadmap](#roadmap)" : "",
     renderLicenseTocEntry(data.license),
     "- [Contact](#contact)",
   ].filter(Boolean);
@@ -98,7 +98,7 @@ ${rows}`;
 function buildTable({ heading, headers, rows }) {
   const headerRow = `| ${headers.join(" | ")} |`;
   const separator = `| ${headers.map(() => "---").join(" | ")} |`;
-  const dataRows  = rows.map((r) => `| ${r.join(" | ")} |`).join("\n");
+  const dataRows = rows.map((r) => `| ${r.join(" | ")} |`).join("\n");
   return `## ${heading}\n\n${headerRow}\n${separator}\n${dataRows}`;
 }
 
@@ -109,10 +109,10 @@ function slugify(title) {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 export function generateMarkdown(data) {
-  const badge   = renderLicenseBadge(data.license);
-  const badges  = techBadges(data.techStack);
+  const badge = renderLicenseBadge(data.license);
+  const badges = techBadges(data.techStack);
   const license = renderLicenseSection(data.license);
-  const slug    = slugify(data.title);
+  const slug = data.repo || slugify(data.title);
 
   const sections = [
     // Header
