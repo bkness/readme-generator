@@ -52,7 +52,10 @@ function techBadges(raw) {
       const key    = tech.toLowerCase();
       const colors = colorMap[key] || "555555&logoColor=white";
       const label  = encodeURIComponent(tech);
-      return `![${tech}](https://img.shields.io/badge/${label}-${colors}&style=flat-square)`;
+      // Flip the first `&` to `?` so shields.io reads logo/logoColor/style as
+      // query params, not literal message text — otherwise logos never render.
+      const query  = colors.replace("&", "?");
+      return `![${tech}](https://img.shields.io/badge/${label}-${query}&style=flat-square)`;
     })
     .join(" ");
 }
