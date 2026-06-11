@@ -70,6 +70,7 @@ function buildToc(data) {
     data.includeScreenshots                      ? "- [Screenshots](#screenshots)"                     : "",
     "- [Installation](#installation)",
     data.envVars?.trim()                         ? "- [Environment Variables](#environment-variables)" : "",
+    ...(data.tables || []).map((t) => `- [${t.heading}](#${slugify(t.heading)})`),
     data.usage?.trim()                           ? "- [Usage](#usage)"                                 : "",
     "- [Tests](#tests)",
     data.includeContributing && data.contributing        ? "- [Contributing](#contributing)"           : "",
@@ -92,6 +93,13 @@ Create a \`.env\` file in the root directory:
 | Variable | Description |
 |----------|-------------|
 ${rows}`;
+}
+
+function buildTable({ heading, headers, rows }) {
+  const headerRow = `| ${headers.join(" | ")} |`;
+  const separator = `| ${headers.map(() => "---").join(" | ")} |`;
+  const dataRows  = rows.map((r) => `| ${r.join(" | ")} |`).join("\n");
+  return `## ${heading}\n\n${headerRow}\n${separator}\n${dataRows}`;
 }
 
 function slugify(title) {
@@ -144,6 +152,9 @@ export function generateMarkdown(data) {
 
     // Env vars
     buildEnvSection(data.envVars),
+
+    // Tables (from user input)
+    ...(data.tables || []).map(buildTable),
 
     // Usage
     data.usage?.trim()

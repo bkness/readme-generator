@@ -6,14 +6,14 @@ import { generateMarkdown } from "./utils/generateMarkdown.js";
 
 // ─── Brand ───────────────────────────────────────────────────────────────────
 
-const neon    = chalk.hex("#00ff00");
-const dim     = chalk.hex("#00ff00").dim;
-const faint   = chalk.hex("#004400");
-const white   = chalk.white;
-const muted   = chalk.gray;
+const neon = chalk.hex("#00ff00");
+const dim = chalk.hex("#00ff00").dim;
+const faint = chalk.hex("#004400");
+const white = chalk.white;
+const muted = chalk.gray;
 const success = chalk.hex("#00ff00").bold;
-const warn    = chalk.yellow;
-const err     = chalk.red;
+const warn = chalk.yellow;
+const err = chalk.red;
 
 function banner() {
   console.clear();
@@ -171,10 +171,67 @@ const questions = [
   },
 ];
 
+// ─── Create Tables ────────────────────────────────────────────────────────────
+
+async function collectTables() {
+  const tables = [];
+
+  let { addTable } = await inquirer.prompt([
+    {
+      type: "confirm", name: "addTable",
+      message: neon("Add a custom table?"), default: false
+    }
+  ]);
+
+  while (addTable) {
+    const { heading, headerLine } = await inquirer.prompt([
+      {
+        type: "input", name: "heading",
+        message: neon("Table heading:"),
+        validate: (v) => v.trim() !== "" || warn("Heading can't be empty.")
+      },
+      {
+        type: "input", name: "headerLine",
+        message: neon("Column headers") + muted(" (comma-separated):"),
+        validate: (v) => v.trim() !== "" || warn("Need at least one column.")
+      },
+    ]);
+
+    const headers = headerLine.split(",").map(h => h.trim());
+
+    const rows = [];
+    for (; ;) {
+      const isFirst = rows.length === 0;
+      const { row } = await inquirer.prompt([
+        {
+          type: "input",
+          name: "row",
+          message:
+            muted(`Row ${rows.length + 1} `) +
+            dim('("|"-separated)') +
+            // Only nag with full instruction on the first row.
+            (isFirst ? muted(" · press Enter on an empty line to finish") : ""),
+        },
+      ]);
+
+      if (!row.trim()) break; // empty line = done
+      rows.push(row.split("|").map((c) => c.trim()));
+    }
+    tables.push({ heading, headers, rows });
+
+    ({ addTable } = await inquirer.prompt([
+      { type: "confirm", name: "addTable",
+        message: neon("Add another table?"), default: false },
+    ]));
+  }
+
+  return tables;
+}
+
 // ─── Output ───────────────────────────────────────────────────────────────────
 
 async function writeReadme(content) {
-  const outDir  = "dist";
+  const outDir = "dist";
   const outFile = `${outDir}/README.md`;
 
   await fs.mkdir(outDir, { recursive: true });
@@ -237,8 +294,9 @@ export async function promptInSections(items) {
 async function init() {
   try {
     banner();
-    const data    = await promptInSections(questions);
-    const content = generateMarkdown(data);
+    const data = await promptInSections(questions);
+    const tables = await collectTables();
+    const content = generateMarkdown({ ...data, tables });
     await writeReadme(content);
   } catch (error) {
     if (error.name === "ExitPromptError") {
