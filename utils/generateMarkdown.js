@@ -62,15 +62,15 @@ function techBadges(raw) {
 function buildToc(data) {
   const entries = [
     "- [Description](#description)",
-    data.techStack?.trim()        ? "- [Tech Stack](#tech-stack)"                       : "",
-    data.includeFeatures          ? "- [Features](#features)"                           : "",
-    data.includeScreenshots       ? "- [Screenshots](#screenshots)"                     : "",
+    data.techStack?.trim()                       ? "- [Tech Stack](#tech-stack)"                       : "",
+    data.includeFeatures && data.features?.trim()        ? "- [Features](#features)"                   : "",
+    data.includeScreenshots                      ? "- [Screenshots](#screenshots)"                     : "",
     "- [Installation](#installation)",
-    data.envVars?.trim()          ? "- [Environment Variables](#environment-variables)" : "",
-    "- [Usage](#usage)",
+    data.envVars?.trim()                         ? "- [Environment Variables](#environment-variables)" : "",
+    data.usage?.trim()                           ? "- [Usage](#usage)"                                 : "",
     "- [Tests](#tests)",
-    data.includeContributing      ? "- [Contributing](#contributing)"                   : "",
-    data.includeRoadmap           ? "- [Roadmap](#roadmap)"                             : "",
+    data.includeContributing && data.contributing        ? "- [Contributing](#contributing)"           : "",
+    data.includeRoadmap && data.roadmap?.trim()          ? "- [Roadmap](#roadmap)"                     : "",
     renderLicenseTocEntry(data.license),
     "- [Contact](#contact)",
   ].filter(Boolean);
@@ -143,7 +143,9 @@ export function generateMarkdown(data) {
     buildEnvSection(data.envVars),
 
     // Usage
-    `## Usage\n\n${data.usage}`,
+    data.usage?.trim()
+      ? `## Usage\n\n\`\`\`bash\n${data.usage}\n\`\`\``
+      : "",
 
     // Tests
     `## Tests\n\n\`\`\`bash\n${data.test}\n\`\`\``,
