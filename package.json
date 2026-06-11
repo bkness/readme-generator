@@ -1,7 +1,8 @@
 {
   "name": "readme-generator",
-  "version": "1.1.0",
-  "description": "Interactive README generator using Inquirer",
+  "version": "2.0.0",
+  "description": "Interactive README generator — devforge edition",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,7 +10,7 @@
   },
   "author": "Brandon <DevBrandon@icloud.com> (https://github.com/bkness)",
   "license": "MIT",
-  "keywords": ["readme", "generator", "cli", "inquirer"],
+  "keywords": ["readme", "generator", "cli", "inquirer", "devforge"],
   "dependencies": {
     "chalk": "^5.6.2",
     "inquirer": "8.2.4"
