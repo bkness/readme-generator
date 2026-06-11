@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 import fs from "fs/promises";
+import { pathToFileURL } from "url";
 import { generateMarkdown } from "./utils/generateMarkdown.js";
 
 // ─── Brand ───────────────────────────────────────────────────────────────────
@@ -207,10 +208,36 @@ async function writeReadme(content) {
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
 
+// inquirer.Separator is only valid inside a prompt's `choices` — passing one as
+// a top-level question throws "You must provide a `name` parameter". So we walk
+// the list, print each separator as a section divider, and prompt the real
+// questions in between. Accumulated answers are threaded through so `when`
+// conditions still resolve.
+export async function promptInSections(items) {
+  const answers = {};
+  let batch = [];
+  const flush = async () => {
+    if (batch.length) {
+      Object.assign(answers, await inquirer.prompt(batch, answers));
+      batch = [];
+    }
+  };
+  for (const item of items) {
+    if (item instanceof inquirer.Separator) {
+      await flush();
+      console.log(item.line);
+    } else {
+      batch.push(item);
+    }
+  }
+  await flush();
+  return answers;
+}
+
 async function init() {
   try {
     banner();
-    const data    = await inquirer.prompt(questions);
+    const data    = await promptInSections(questions);
     const content = generateMarkdown(data);
     await writeReadme(content);
   } catch (error) {
@@ -223,4 +250,8 @@ async function init() {
   }
 }
 
-init();
+// Only run the interactive flow when executed directly (`node index.js`),
+// so the module can be imported for testing without launching prompts.
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  init();
+}
